@@ -1,2 +1,2 @@
 #!/bin/sh
-monodis --userstrings --output=userstrings.txt /Developer/MonoTouch/usr/lib/32bits/Xamarin.iOS.dll
+monodis --userstrings --output=userstrings.txt /Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Xamarin.iOS.dll
