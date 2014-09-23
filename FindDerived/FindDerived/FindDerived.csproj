@@ -48,6 +48,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModuleHandler.cs" />
+    <Compile Include="CecilVisitorBase.cs" />
+    <Compile Include="UsageFinder\PropertyUsageFinder.cs" />
+    <Compile Include="Printer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -57,5 +60,11 @@
     <Content Include="monotouch.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Xamarin.iOS.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UsageFinder\" />
   </ItemGroup>
 </Project>

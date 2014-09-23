@@ -30,18 +30,28 @@ namespace FindDerived
 			}
 			*/
 
-			ModuleDefinition mtouchDef = ModuleDefinition.ReadModule ("monotouch.dll");
+//			ModuleDefinition mtouchDef = ModuleDefinition.ReadModule ("monotouch.dll");
+			ModuleDefinition mtouchDef = ModuleDefinition.ReadModule ("Xamarin.iOS.dll");
+			Printer printer = new Printer ();
 			ModuleHandler handler = new ModuleHandler (mtouchDef);
 //			handler.FindDerivedFrom ("MonoTouch.Foundation.DictionaryContainer");
 //			handler.FindDerivedFrom ("MonoTouch.CoreVideo.CVPixelBufferAttributes");
 //			handler.FindMethodWithParameterName ("options");
 //			handler.FindMethodWithParameter ("MonoTouch.Foundation.NSDictionary", "options");
+//			handler.FindMethodWithParameterType ("CoreGraphics.CGAffineTransform");
 
 //			handler.FindMethodWithParameterName ("completionHandler");
-			handler.FindMethodWithStringConstant ("setView:");
+//			handler.FindMethodWithStringConstant ("MKMetersPerMapPointAtLatitude:");
+//			handler.FindPropertiesByType ("MobileCoreServices.UTType", "Foundation.NSString");
+
+
+			PropertyDefinition prop = handler.FindProperty ("UIKit.UIImagePickerController", "OriginalImage");
+			PropertyUsageFinder pUsageFinder = new PropertyUsageFinder (mtouchDef, prop);
+			IEnumerable<MethodReference> callers = pUsageFinder.Find ();
+
+			foreach (var mRef in callers)
+				printer.Print (mRef);
 		}
-
-
 	}
 
 	/*

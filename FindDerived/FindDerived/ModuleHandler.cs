@@ -4,6 +4,7 @@ using Mono.Cecil;
 using System.Linq;
 using Mono.Collections.Generic;
 using Mono.Cecil.Cil;
+using System.Collections.Generic;
 
 namespace FindDerived
 {
@@ -31,7 +32,22 @@ namespace FindDerived
 					}
 				}
 			}
+		}
 
+
+		public PropertyDefinition FindProperty(string propertyHolderFullName, string propertyName)
+		{
+			foreach (var t in _module.Types) {
+				if (t.FullName != propertyHolderFullName)
+					continue;
+
+				foreach (PropertyDefinition p in t.Properties) {
+					if (p.Name == propertyName)
+						return p;
+				}
+			}
+
+			return null;
 		}
 
 		public void FindMethodWithParameterName(string parameterName)
@@ -45,6 +61,21 @@ namespace FindDerived
 						if(pDef.Name == parameterName)
 							Console.WriteLine ("{0} {1}", td.FullName, mDef.ToString());
 					} 
+				}
+			}
+		}
+
+		public void FindMethodWithParameterType(string parameterTypeFullName)
+		{
+			foreach (var td in _module.Types) {
+				foreach (var mDef in td.Methods) {
+					if (mDef.IsConstructor)
+						continue;
+
+					foreach (var pDef in mDef.Parameters) {
+						if(pDef.ParameterType.FullName == parameterTypeFullName)
+							Console.WriteLine ("{0} {1}", td.FullName, mDef.ToString());
+					}
 				}
 			}
 		}
@@ -63,6 +94,8 @@ namespace FindDerived
 				}
 			}
 		}
+
+
 
 
 		public void FindDerivedFrom(string baseTypeFullName)
@@ -94,6 +127,17 @@ namespace FindDerived
 			}
 
 			return isDerived;
+		}
+
+		public void FindPropertiesByType(string typeFullName, string propertyTypeFullName)
+		{
+			TypeDefinition typeDef = _module.GetType (typeFullName);
+			Collection<PropertyDefinition> props = typeDef.Properties;
+
+			foreach (PropertyDefinition p in props) {
+				if(p.PropertyType.FullName == propertyTypeFullName)
+					Console.WriteLine (p.FullName);
+			}
 		}
 	}
 }
