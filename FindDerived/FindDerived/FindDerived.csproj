@@ -51,6 +51,14 @@
     <Compile Include="CecilVisitorBase.cs" />
     <Compile Include="UsageFinder\PropertyUsageFinder.cs" />
     <Compile Include="Printer.cs" />
+    <Compile Include="DeclarationFinder\MethodFinder.cs" />
+    <Compile Include="DeclarationFinder\MethodPolicy\MethodNamePolicy.cs" />
+    <Compile Include="DeclarationFinder\Policy.cs" />
+    <Compile Include="DeclarationFinder\AndPolicy.cs" />
+    <Compile Include="DeclarationFinder\MethodPolicy\MethodParametersPolicy\MethodParametersPolicy.cs" />
+    <Compile Include="DeclarationFinder\MethodPolicy\Impl\MethodNameStartWithPolicy.cs" />
+    <Compile Include="DeclarationFinder\MethodPolicy\MethodParametersPolicy\Impl\MethodParametersTypeNameMatch.cs" />
+    <Compile Include="DeclarationFinder\MethodPolicy\MethodParametersPolicy\Impl\TypeNameMatch.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -63,5 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UsageFinder\" />
+    <Folder Include="DeclarationFinder\" />
+    <Folder Include="DeclarationFinder\MethodPolicy\" />
+    <Folder Include="Implementations\" />
+    <Folder Include="DeclarationFinder\MethodPolicy\MethodParametersPolicy\" />
+    <Folder Include="DeclarationFinder\MethodPolicy\Impl\" />
+    <Folder Include="DeclarationFinder\MethodPolicy\MethodParametersPolicy\Impl\" />
   </ItemGroup>
 </Project>
